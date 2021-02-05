@@ -24,6 +24,7 @@ public class Calculadora extends javax.swing.JFrame {
     private boolean botaoSubtracao;
     private boolean botaoMultiplicacao;
     private boolean botaoDivisao;
+    private boolean lock;
     
     /**
      * Creates new form Calculadora
@@ -75,6 +76,14 @@ public class Calculadora extends javax.swing.JFrame {
     
     public boolean getZerar(){
         return this.zerar;
+    }
+    
+    public void setLock(boolean lock){
+        this.lock = lock;
+    }
+    
+    public boolean getLock(){
+        return this.lock;
     }
     
     /*BOTOES*/
@@ -467,7 +476,7 @@ public class Calculadora extends javax.swing.JFrame {
     
     public void logicaVisor(){
         for(int i = 0; i < calculadora.length; i++){
-            System.out.println("Calculadora["+ (i + 1) +"] "+ calculadora[0]);
+            //System.out.println("Calculadora["+ (i + 1) +"] "+ calculadora[0]);
             
             // Verifica se algum botal foi pressionado e se a posicao do Array e diferente de null, para certificar que nao sera sobrescrito nenhum valor digitado
             if(this.getBotao() && calculadora[i] == null){
@@ -480,10 +489,10 @@ public class Calculadora extends javax.swing.JFrame {
                 lblPainel.setText(memoria.toString());
             }
         }
-        for(int i = 0; i < calculadora.length; i++){
+        /*for(int i = 0; i < calculadora.length; i++){
             System.out.print(calculadora[i] +" ");
         }
-        System.out.println("");
+        System.out.println("");*/
     }
     
     public void zerarCalculadora(){
@@ -499,8 +508,8 @@ public class Calculadora extends javax.swing.JFrame {
                 lblPainel.setText(memoria.toString());
                 lblPainel.setText("0");
                 
-                System.out.println("Memoria deletada: "+ memoria);
-                System.out.println("Comprimento da Memoria: "+ memoria.length());
+                /*System.out.println("Memoria deletada: "+ memoria);
+                System.out.println("Comprimento da Memoria: "+ memoria.length());*/
                    
             }
             
@@ -508,9 +517,9 @@ public class Calculadora extends javax.swing.JFrame {
             for(int j = 0; j < calculadora.length; j++){
                 calculadora[j] = null;
 
-                System.out.println("Valores do Array: "+ calculadora[j]);
+                /*System.out.println("Valores do Array: "+ calculadora[j]);
                 System.out.println("Memoria deletada: "+ memoria);
-                System.out.println("Comprimento da Memoria: "+ memoria.length());
+                System.out.println("Comprimento da Memoria: "+ memoria.length());*/
             }
             
             this.setZerar(false);
@@ -523,7 +532,7 @@ public class Calculadora extends javax.swing.JFrame {
         // Recebe a o valor do Buff de Memoria e converte para double para que possa ser utilizado em calculos
         if(this.getBotao()){
             this.setValorGerado(Integer.parseInt(memoria.toString()));
-            System.out.println(this.getValorGerado());
+            //System.out.println(this.getValorGerado());
             
             // Verifica qual operador foi pressionado e aplica o operador correto, caso a caso
             switch(this.getOperacao()){
@@ -548,7 +557,7 @@ public class Calculadora extends javax.swing.JFrame {
                     }
                     
                     this.setValorAcumulado(this.getValorAcumulado() * this.getValorGerado());
-                    System.out.println("Multipliacao: "+ this.getValorAcumulado());
+                    //System.out.println("Multipliacao: "+ this.getValorAcumulado());
 
                     // Limpa a memoria para que possa ser inserido um novo valor
                     this.zerarCalculadora();
@@ -560,7 +569,7 @@ public class Calculadora extends javax.swing.JFrame {
                     }
                     
                     this.setValorAcumulado(this.getValorAcumulado() * this.getValorGerado());
-                    System.out.println("Divisao: "+ this.getValorAcumulado());
+                    //System.out.println("Divisao: "+ this.getValorAcumulado());
 
                     // Limpa a memoria para que possa ser inserido um novo valor
                     this.zerarCalculadora();
@@ -599,7 +608,7 @@ public class Calculadora extends javax.swing.JFrame {
                 break;
             }
             
-            System.out.println("O valor Acumulado e: "+ this.getValorAcumulado());
+            //System.out.println("O valor Acumulado e: "+ this.getValorAcumulado());
             this.setBotao(false);
         }
     }
@@ -715,6 +724,9 @@ public class Calculadora extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setBotao(true);
         this.setValorAcumulado(0);
+        this.setValor(0);
+        
+        lblPainel.setText(Integer.toString(this.getValor()));
         
         // Zera o array da calculadora, e instancia todas as posicoes da memoria como sendo null
         this.zerarCalculadora();
